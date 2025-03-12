@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro para la Convocatoria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; }
+
+        /* Estilos generales (para todos los tamaños de pantalla) */
+        .container {
+            width: 80%; /* Ancho máximo, se ajustará en pantallas pequeñas */
+            max-width: 600px; /* Ancho máximo absoluto */
+            margin: 0 auto; /* Centra horizontalmente */
+            text-align: center; /* Centra el texto dentro del contenedor */
+        }
+
+        /* Contenedor para las listas (usando Flexbox) */
+        .listas-container {
+            display: flex;        /* Activa Flexbox */
+            flex-direction: column; /* Apila los elementos verticalmente (por defecto es row) */
+            align-items: stretch;  /* Estira los elementos para que ocupen todo el ancho */
+            width: 100%;          /* Ocupa todo el ancho del .container */
+        }
+
+        .registrados, .lista-espera {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+            flex: 1; /* ¡Importante! Hace que ambas listas tengan el mismo ancho */
+        }
+
+        ul { list-style: none; padding: 0; } /* Se usa para la lista de participantes disponibles*/
+        ol { padding-left: 20px; } /* Para listas ordenadas (registrados y espera).  Añade un poco de padding. */
+
+        li { margin-bottom: 5px; }
+        .eliminar-form { display: inline; }
+
+        .admin-section { border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; }
+		  .error-message { color: red; font-weight: bold; margin-top: 10px; }
+
+        select[name="participante"]{
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+            box-sizing: border-box;
+            width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+            margin-bottom: 12px; /*Espacio entre el select y el botón*/
+        }
+        button[type="submit"]{
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: 1px solid #ccc; /* Añade si no lo tenías antes, importante si combinas con flexbox */
+            border-radius: 5px;
+            box-sizing: border-box; /* Añade si no lo tenías */
+            width: 100%; /* Ocupa todo el ancho en pantallas pequeñas, importante */
+        }
+        @media (min-width: 768px) {  /* Por ejemplo, 768px es un punto de ruptura común */
+        select[name="participante"] {
+            width: auto; /* Permite que el ancho se ajuste al contenido */
+            margin-right: 10px; /* Aplica el margen solo en pantallas anchas */
+            margin-bottom: 0;
+        }
+        button[type="submit"]{
+            width: auto; /*Regresamos el valor a auto*/
+        }
+        }
+
+        /* Estilos para los botones de eliminar */
+        .eliminar-form button {
+            padding: 3px 6px;       /* Reduce el padding */
+            font-size: 12px;      /* Reduce el tamaño de la fuente */
+            background-color: red; /* Cambia el color a rojo */
+            color: white;         /* Texto blanco para que contraste */
+            border: none;          /* Quita el borde */
+            border-radius: 3px;     /* Redondea un poco las esquinas */
+            box-sizing: border-box; /* Añade si no lo tenías */
+            width: auto;    /* Permite que el ancho se ajuste al contenido */
+            cursor: pointer;       /* Cambia el cursor a una mano */
+        }
+
+        .whatsapp-icon {
+            width: 48px; /* Tamaño del icono */
+            height: 48px;
+            vertical-align: middle; /* Alinea verticalmente con el texto */
+            margin-left: 10px; /* Espacio entre el título y el icono */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+       <h1>Registro para la Convocatoria de Juego
+            <a id="whatsapp-link" href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/240px-WhatsApp.svg.png" alt="Compartir en WhatsApp" class="whatsapp-icon">
+            </a>
+        </h1>
+        <h2>Torneo: {{ configuracion.torneo }}</h2>
+        <p>Lugar: {{ configuracion.lugar }}</p>
+        <p>Fecha: {{ configuracion.fecha }}</p>
+        <p>Hora: {{ configuracion.hora }}</p>
+        <p>Nº de canchas: {{ configuracion.num_canchas }}</p>
+        <p>Bloques: {{ configuracion.bloques }}</p>
+        <p>Total de Participantes: {{ configuracion.total_participantes }}</p>
+
+
+        {% if admin_logged_in %}
+        <div class="admin-section">
+            <h3>Opciones de Administrador</h3>
+            <p><a href="{{ url_for('config') }}">Configurar Convocatoria</a></p>
+            <p><a href="{{ url_for('logout') }}">Cerrar sesión de administrador</a></p>
+        </div>
+        {% else %}
+          <p><a href="{{ url_for('admin') }}">Acceder como administrador</a></p>
+        {% endif %}
+
+        <p>Por favor, selecciona tu nombre de la lista:</p>
+        <form method="POST">
+            <select name="participante">
+                <option value="">-- Selecciona tu nombre --</option>
+                {% for participante in participantes %}
+                    <option value="{{ participante }}">{{ participante }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Registrarme</button>
+        </form>
+
+			 {% if mensaje %}
+        		<p class="error-message">{{ mensaje }}</p>
+        	 {% endif %}
+		<div class="listas-container">
+            <div class="registrados">
+              <h2>Lista de participantes registrados.</h2>
+              <p>Total de inscritos: {{ num_registrados }}</p>
+              {% if registrados %}
+                  <ol>
+                    {% for registrado in registrados %}
+                        <li>
+                            {{ registrado }}
+                            {% if admin_logged_in %}
+                                <form method="POST" action="{{ url_for('deseleccionar') }}" class="eliminar-form">
+                                    <input type="hidden" name="nombre_eliminar" value="{{ registrado }}">
+                                    <button type="submit">X</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                  </ol>
+              {% else %}
+                <p>Todavía no hay ningún participante en la lista.</p>
+              {% endif %}
+            </div>
+            <div class="lista-espera">
+                <h2>Lista de Espera</h2>
+                <p>Total en espera: {{ num_espera }}</p>
+                {% if lista_espera %}
+                    <ol>
+                        {% for participante in lista_espera %}
+                            <li>
+                                {{ participante }}
+                                {% if admin_logged_in %}
+                                    <form method="POST" action="{{ url_for('deseleccionar_espera') }}" class="eliminar-form">
+                                        <input type="hidden" name="nombre_eliminar_espera" value="{{ participante }}">
+                                        <button type="submit">X</button>
+                                    </form>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <p>La lista de espera está vacía.</p>
+                {% endif %}
+            </div>
+        </div>
+	</div>
+	<script>
+        // Obtener el enlace y el texto de la convocatoria
+        const whatsappLink = document.getElementById('whatsapp-link');
+        //Usamos fetch API en vez de  fetchTextConvocatoria()
+        fetch('/texto_convocatoria') //  '/texto_convocatoria' es la ruta que creamos en app.py
+        .then(response => response.text()) //Obtenemos el texto
+        .then(texto => {
+            // Codificar el texto para la URL
+            const textoCodificado = encodeURIComponent(texto);
+            // Construir la URL de WhatsApp
+            const whatsappURL = `whatsapp://send?text=${textoCodificado}`;
+            // Establecer la URL en el atributo href del enlace
+            whatsappLink.href = whatsappURL;
+        })
+        .catch(error => { //Manejar errores
+            console.error('Error al obtener el texto de la convocatoria:', error);
+            whatsappLink.href = "#"; //En caso de error
+            whatsappLink.removeAttribute("target");
+
+        });
+    </script>
+</body>
+</html>

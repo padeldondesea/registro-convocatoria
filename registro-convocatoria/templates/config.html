@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuración de la Convocatoria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; }
+        .container { width: 80%; margin: 0 auto; }
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"], select { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        button { padding: 10px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Configuración de la Convocatoria</h1>
+        <form method="POST">
+            <label for="torneo">Torneo:</label>
+            <input type="text" id="torneo" name="torneo" value="{{ configuracion.torneo }}" required>
+
+            <label for="lugar">Lugar:</label>
+            <input type="text" id="lugar" name="lugar" value="{{ configuracion.lugar }}" required>
+
+            <label for="fecha">Fecha:</label>
+            <input type="text" id="fecha" name="fecha" value="{{ configuracion.fecha }}" required>
+
+            <label for="hora">Hora:</label>
+            <input type="text" id="hora" name="hora" value="{{ configuracion.hora }}" required>
+
+            <label for="num_canchas">Número de Canchas:</label>
+            <input type="text" id="num_canchas" name="num_canchas" value="{{ configuracion.num_canchas }}" required>
+
+            <label for="bloques">Bloques:</label>
+            <input type="text" id="bloques" name="bloques" value="{{ configuracion.bloques }}" required>
+
+            <label for="total_participantes">Seleccionar Total de Participantes:</label>
+            <select name="total_participantes" id="total_participantes">
+                {% for i in range(4, 81, 4) %}
+                    <option value="{{ i }}" {% if i == configuracion.total_participantes|int %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+
+
+            <button type="submit">Guardar Configuración</button>
+        </form>
+        <p><a href="{{ url_for('index') }}">Volver a la página principal</a></p>
+    </div>
+</body>
+</html>
