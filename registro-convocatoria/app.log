@@ -1,0 +1,71 @@
+2025-03-13 20:31:56,652 - ERROR - OSError: write error
+2025-03-13 20:33:32,118 - ERROR - OSError: write error
+2025-03-13 20:41:11,824 - INFO - app.py:27 - Guardando registro para: Camejo
+2025-03-13 20:41:54,156 - INFO - app.py:27 - Guardando registro para: Carmine
+2025-03-13 20:41:54,161 - INFO - app.py:27 - Guardando registro para: Adrián Orlando
+2025-03-13 20:41:54,165 - INFO - app.py:27 - Guardando registro para: Camejo
+2025-03-13 20:41:54,169 - INFO - app.py:27 - Guardando registro para: Alberto Perillo
+2025-03-13 20:42:08,465 - INFO - app.py:27 - Guardando registro para: Juan Bautista
+2025-03-13 20:42:20,842 - INFO - app.py:27 - Guardando registro para: Alex
+2025-03-13 20:42:24,073 - INFO - app.py:27 - Guardando registro para: Yoyo
+2025-03-13 20:42:26,370 - INFO - app.py:27 - Guardando registro para: Víctor Ludeña
+2025-03-13 20:42:33,377 - INFO - app.py:53 - Guardando en espera a: Rodolfo Marquina
+2025-03-13 20:45:14,070 - INFO - app.py:73 - Participante 'Rodolfo Marquina' eliminado de la lista de espera.
+2025-03-13 20:45:16,719 - INFO - app.py:73 - Participante 'Víctor Ludeña' eliminado de la lista de espera.
+2025-03-13 20:45:19,036 - INFO - app.py:73 - Participante 'Yoyo' eliminado de la lista de espera.
+2025-03-13 20:45:21,387 - INFO - app.py:73 - Participante 'Alex' eliminado de la lista de espera.
+2025-03-13 20:45:25,474 - INFO - app.py:73 - Participante 'Juan Bautista' eliminado de la lista de espera.
+2025-03-13 20:45:27,769 - INFO - app.py:47 - Participante 'Alberto Perillo' eliminado de registrados.
+2025-03-13 20:45:30,768 - INFO - app.py:47 - Participante 'Camejo' eliminado de registrados.
+2025-03-13 20:45:34,557 - INFO - app.py:47 - Participante 'José Luis Saavedra' eliminado de registrados.
+2025-03-13 20:45:38,039 - INFO - app.py:47 - Participante 'Harold Vásquez' eliminado de registrados.
+2025-03-13 20:45:40,783 - INFO - app.py:47 - Participante 'Augusto Stenta' eliminado de registrados.
+2025-03-13 20:45:43,250 - INFO - app.py:47 - Participante 'Cándido' eliminado de registrados.
+2025-03-13 20:45:46,460 - INFO - app.py:47 - Participante 'Dany Cataldo' eliminado de registrados.
+2025-03-13 20:45:51,082 - INFO - app.py:47 - Participante 'Gianni Cangialosi' eliminado de registrados.
+2025-03-13 20:45:53,662 - INFO - app.py:47 - Participante 'Adrián Orlando' eliminado de registrados.
+2025-03-13 20:45:55,964 - INFO - app.py:47 - Participante 'Carmine' eliminado de registrados.
+2025-03-13 20:45:57,869 - INFO - app.py:47 - Participante 'Claudio Bagnara' eliminado de registrados.
+2025-03-13 20:45:59,722 - INFO - app.py:47 - Participante 'Franco Granati' eliminado de registrados.
+2025-03-13 21:05:40,035 - INFO - app.py:27 - Guardando registro para: Augusto Stenta
+2025-03-13 21:11:04,236 - INFO - app.py:47 - Participante 'Augusto Stenta' eliminado de registrados.
+2025-03-13 21:28:25,316 - INFO - app.py:27 - Guardando registro para: Augusto Stenta
+2025-03-13 21:28:41,571 - INFO - app.py:47 - Participante 'Augusto Stenta' eliminado de registrados.
+2025-03-13 21:58:19,838 - INFO - app.py:27 - Guardando registro para: Adrián Orlando
+2025-03-13 21:58:23,183 - INFO - app.py:27 - Guardando registro para: Alberto Perillo
+2025-03-13 21:58:28,761 - INFO - app.py:27 - Guardando registro para: Alex
+2025-03-13 21:58:33,096 - INFO - app.py:27 - Guardando registro para: Alvaro Rodrigues
+2025-03-13 21:58:38,009 - INFO - app.py:27 - Guardando registro para: Augusto Stenta
+2025-03-13 21:58:43,821 - INFO - app.py:27 - Guardando registro para: Bassil
+2025-03-13 21:58:49,072 - INFO - app.py:27 - Guardando registro para: Camejo
+2025-03-13 21:58:54,688 - INFO - app.py:27 - Guardando registro para: Cándido
+2025-03-13 21:59:01,212 - INFO - app.py:53 - Guardando en espera a: Carmine
+2025-03-13 21:59:07,755 - INFO - app.py:53 - Guardando en espera a: Claudio Bagnara
+2025-03-13 21:59:55,559 - INFO - app.py:27 - Guardando registro para: Camejo
+2025-03-13 21:59:55,564 - INFO - app.py:27 - Guardando registro para: Cándido
+2025-03-13 21:59:55,568 - INFO - app.py:27 - Guardando registro para: Carmine
+2025-03-13 21:59:55,573 - INFO - app.py:27 - Guardando registro para: Claudio Bagnara
+2025-03-13 22:00:15,959 - INFO - app.py:27 - Guardando registro para: Dany Cataldo
+2025-03-13 22:00:21,406 - INFO - app.py:27 - Guardando registro para: Franco Granati
+2025-03-13 22:00:28,249 - INFO - app.py:53 - Guardando en espera a: Gianni Cangialosi
+2025-03-13 22:00:35,922 - INFO - app.py:47 - Participante 'Franco Granati' eliminado de registrados.
+2025-03-13 22:00:35,924 - INFO - app.py:27 - Guardando registro para: Gianni Cangialosi
+2025-03-13 22:01:00,003 - INFO - app.py:53 - Guardando en espera a: Franco Granati
+2025-03-13 22:01:05,658 - INFO - app.py:47 - Participante 'Claudio Bagnara' eliminado de registrados.
+2025-03-13 22:01:05,664 - INFO - app.py:27 - Guardando registro para: Franco Granati
+2025-03-13 22:01:13,517 - INFO - app.py:47 - Participante 'Franco Granati' eliminado de registrados.
+2025-03-13 22:01:16,504 - INFO - app.py:47 - Participante 'Adrián Orlando' eliminado de registrados.
+2025-03-13 22:01:18,587 - INFO - app.py:47 - Participante 'Alberto Perillo' eliminado de registrados.
+2025-03-13 22:01:22,049 - INFO - app.py:47 - Participante 'Gianni Cangialosi' eliminado de registrados.
+2025-03-13 22:01:23,992 - INFO - app.py:47 - Participante 'Dany Cataldo' eliminado de registrados.
+2025-03-13 22:01:26,159 - INFO - app.py:47 - Participante 'Carmine' eliminado de registrados.
+2025-03-13 22:01:28,174 - INFO - app.py:47 - Participante 'Cándido' eliminado de registrados.
+2025-03-13 22:01:31,060 - INFO - app.py:47 - Participante 'Camejo' eliminado de registrados.
+2025-03-13 22:01:33,013 - INFO - app.py:47 - Participante 'Bassil' eliminado de registrados.
+2025-03-13 22:01:35,615 - INFO - app.py:47 - Participante 'Augusto Stenta' eliminado de registrados.
+2025-03-13 22:01:37,776 - INFO - app.py:47 - Participante 'Alvaro Rodrigues' eliminado de registrados.
+2025-03-13 22:01:39,592 - INFO - app.py:47 - Participante 'Alex' eliminado de registrados.
+2025-03-15 01:40:22,074 - INFO - app.py:27 - Guardando registro para: Augusto Stenta
+2025-03-15 01:40:29,551 - INFO - app.py:27 - Guardando registro para: Camejo
+2025-03-15 04:13:28,165 - INFO - app.py:47 - Participante 'Camejo' eliminado de registrados.
+2025-03-15 04:13:30,403 - INFO - app.py:47 - Participante 'Augusto Stenta' eliminado de registrados.

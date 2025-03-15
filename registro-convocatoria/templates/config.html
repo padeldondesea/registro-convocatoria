@@ -4,46 +4,161 @@
     <title>Configuración de la Convocatoria</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: sans-serif; }
-        .container { width: 80%; margin: 0 auto; }
-        label { display: block; margin-bottom: 5px; }
-        input[type="text"], select { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
-        button { padding: 10px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #333;
+        }
+        /* Estilos unificados para todos los inputs relevantes */
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        textarea, /* Añadimos textarea a los estilos unificados */
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Estilo específico para el input de fecha (para el placeholder con JS) */
+        input[type="date"]::before {
+            color: #999; /* Color del texto del placeholder */
+            content: attr(data-placeholder); /* Usa el atributo data-placeholder */
+            width: 100%;
+        }
+        input[type="date"]:focus::before,
+        input[type="date"]:valid::before {
+            display: none;
+        }
+
+        /* Estilo para el input de hora (formato AM/PM con JS) */
+          /*Ocultar el formato nativo*/
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+        input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+            display: none;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px; /* Aumenté el padding */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px; /* Aumenté el tamaño de la fuente */
+            margin-bottom: 20px;  /* Margen inferior */
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        /* Contenedor para el input y el texto superpuesto (para la hora) */
+        .time-input-container {
+            position: relative; /* Importante para el posicionamiento absoluto */
+            display: inline-block; /* Para que el contenedor se ajuste al ancho del input */
+            width: 100%; /*Para que se ajuste al ancho total*/
+        }
+
+        /* Texto superpuesto (para la hora) */
+        .time-display {
+            position: absolute;
+            top: 50%;  /* Centrado verticalmente */
+            left: 10px; /* Pegado a la izquierda (con un pequeño margen) */
+            transform: translateY(-50%); /* Centrado verticalmente (¡IMPORTANTE!) */
+            color: #333;
+            pointer-events: none;
+            font-size: 16px;
+            display: none;
+        }
+          /* Mostrar el texto y ocultar el input nativo cuando tenga valor */
+        .time-input-container input[type="time"]:valid + .time-display {
+            display: block;
+        }
+        .time-input-container input[type="time"]:valid{
+            color: transparent;
+            background-color: transparent; /*Para que no se vea el texto original*/
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Configuración de la Convocatoria</h1>
-        <form method="POST">
-            <label for="torneo">Torneo:</label>
-            <input type="text" id="torneo" name="torneo" value="{{ configuracion.torneo }}" required>
+    <h1>Configuración de la Convocatoria</h1>
 
-            <label for="lugar">Lugar:</label>
-            <input type="text" id="lugar" name="lugar" value="{{ configuracion.lugar }}" required>
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
 
-            <label for="fecha">Fecha:</label>
-            <input type="text" id="fecha" name="fecha" value="{{ configuracion.fecha }}" required>
+    <form method="POST" action="{{ url_for('config') }}">
+        <label for="torneo">Torneo:</label>
+        <input type="text" id="torneo" name="torneo" value="{{ configuracion.torneo }}">
 
-            <label for="hora">Hora:</label>
-            <input type="text" id="hora" name="hora" value="{{ configuracion.hora }}" required>
+        <label for="lugar">Lugar:</label>
+        <input type="text" id="lugar" name="lugar" value="{{ configuracion.lugar }}">
 
-            <label for="num_canchas">Número de Canchas:</label>
-            <input type="text" id="num_canchas" name="num_canchas" value="{{ configuracion.num_canchas }}" required>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" value="{{ configuracion.fecha }}" required
+        data-placeholder="DD-MM-AAAA">
+        <label for="hora">Hora:</label>
+        <div class="time-input-container">
+            <input type="time" id="hora" name="hora" value="{{ configuracion.hora }}" required>
+            <span class="time-display">{{ hora_formateada }}</span>
+        </div>
 
-            <label for="bloques">Bloques:</label>
-            <input type="text" id="bloques" name="bloques" value="{{ configuracion.bloques }}" required>
+        <label for="num_canchas">Número de canchas:</label>
+        <input type="number" id="num_canchas" name="num_canchas" value="{{ configuracion.num_canchas }}">
 
-            <label for="total_participantes">Seleccionar Total de Participantes:</label>
-            <select name="total_participantes" id="total_participantes">
-                {% for i in range(4, 81, 4) %}
-                    <option value="{{ i }}" {% if i == configuracion.total_participantes|int %}selected{% endif %}>{{ i }}</option>
-                {% endfor %}
-            </select>
+        <label for="bloques">Bloques:</label>
+        <input type="number" id="bloques" name="bloques" value="{{ configuracion.bloques }}">
+
+        <label for="total_participantes">Total de Participantes (entre 4 y 80):</label>
+        <input type="number" id="total_participantes" name="total_participantes" value="{{ configuracion.total_participantes }}" min="4" max="80">
+
+        <label for="comentarios">Comentarios (máximo 1000 caracteres):</label>
+        <textarea id="comentarios" name="comentarios" rows="4" maxlength="1000">{{ configuracion.comentarios }}</textarea>
 
 
-            <button type="submit">Guardar Configuración</button>
-        </form>
-        <p><a href="{{ url_for('index') }}">Volver a la página principal</a></p>
-    </div>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{{ url_for('index') }}">Volver a la página principal</a>
+
+    <script>
+    // --- JavaScript para la fecha (DD-MM-AAAA) ---
+    const dateInput = document.getElementById('fecha');
+
+    //Cuando se carga la página
+    if (dateInput.value) { // Si ya hay una fecha
+        formatDate(); // Formatear la fecha.
+    }
+   function formatDate(){
+       const [year, month, day] = dateInput.value.split('-');
+        dateInput.value = `${year}-${month}-${day}`; // Mantener formato interno
+        dateInput.style.color = "#333"; // Asegurar color de texto visible
+
+   }
+
+    // Formatear en el evento 'change' (cuando el usuario selecciona una fecha)
+    dateInput.addEventListener('change', formatDate);
+
+
+    // --- JavaScript para la hora (HH:MM AM/PM) ---
+    //Este formateo se hace con CSS
+
+    </script>
 </body>
 </html>

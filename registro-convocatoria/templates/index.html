@@ -102,8 +102,8 @@
         </h1>
         <h2>Torneo: {{ configuracion.torneo }}</h2>
         <p>Lugar: {{ configuracion.lugar }}</p>
-        <p>Fecha: {{ configuracion.fecha }}</p>
-        <p>Hora: {{ configuracion.hora }}</p>
+        <p>Fecha: {{ fecha_formateada }}</p>
+        <p>Hora: {{ hora_formateada }}</p>
         <p>Nº de canchas: {{ configuracion.num_canchas }}</p>
         <p>Bloques: {{ configuracion.bloques }}</p>
         <p>Total de Participantes: {{ configuracion.total_participantes }}</p>
@@ -178,26 +178,70 @@
             </div>
         </div>
 	</div>
-	<script>
-        // Obtener el enlace y el texto de la convocatoria
-        const whatsappLink = document.getElementById('whatsapp-link');
-        //Usamos fetch API en vez de  fetchTextConvocatoria()
-        fetch('/texto_convocatoria') //  '/texto_convocatoria' es la ruta que creamos en app.py
-        .then(response => response.text()) //Obtenemos el texto
-        .then(texto => {
-            // Codificar el texto para la URL
-            const textoCodificado = encodeURIComponent(texto);
-            // Construir la URL de WhatsApp
-            const whatsappURL = `whatsapp://send?text=${textoCodificado}`;
-            // Establecer la URL en el atributo href del enlace
-            whatsappLink.href = whatsappURL;
-        })
-        .catch(error => { //Manejar errores
-            console.error('Error al obtener el texto de la convocatoria:', error);
-            whatsappLink.href = "#"; //En caso de error
-            whatsappLink.removeAttribute("target");
+<script>
+    // Obtener el enlace de WhatsApp
+    const whatsappLink = document.getElementById('whatsapp-link');
 
+    // Función para construir el mensaje de WhatsApp
+    function construirMensaje(datos) {
+        let texto = "Registro para la Convocatoria de Juego\n\n";
+        texto += `Torneo: ${datos.torneo}\n`;
+        texto += `Lugar: ${datos.lugar}\n`;
+        texto += `Fecha: ${datos.fecha}\n`;  // Ya viene formateada
+        texto += `Hora: ${datos.hora}\n`;    // Ya viene formateada
+        texto += `Nº de canchas: ${datos.num_canchas}\n`;
+        texto += `Bloques: ${datos.bloques}\n`;
+        texto += `Total de Participantes: ${datos.total_participantes}\n\n`;
+
+        texto += "Lista de participantes registrados:\n";
+        if (datos.registrados.length > 0) {
+            datos.registrados.forEach((nombre, index) => {
+                texto += `${index + 1}. ${nombre}\n`; // Usando Template Literals
+            });
+        } else {
+            texto += "Todavía no hay ningún participante en la lista.\n";
+        }
+
+        texto += "\nLista de Espera:\n";
+        if (datos.lista_espera.length > 0) {
+            datos.lista_espera.forEach((nombre, index) => {
+                texto += `${index + 1}. ${nombre}\n`; // Usando Template Literals
+            });
+        } else {
+            texto += "La lista de espera está vacía.\n";
+        }
+
+        // Añadir los comentarios
+        texto += `\nComentarios: \n${datos.comentarios}\n`;
+
+        return encodeURIComponent(texto); // Codificar el mensaje completo
+    }
+
+
+    // Usar fetch para obtener los datos de la convocatoria
+    fetch('/datos_convocatoria')
+        .then(response => response.json())
+        .then(datos => {
+            // Construir el mensaje de WhatsApp con los datos
+            const textoCodificado = construirMensaje(datos);
+            const whatsappURL = `whatsapp://send?text=${textoCodificado}`;
+            whatsappLink.href = whatsappURL;
+
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos de la convocatoria:', error);
+            whatsappLink.href = "#"; // En caso de error, no hacer nada.
+            //  Podrías mostrar un mensaje de error al usuario aquí si quieres.
         });
-    </script>
+
+     //  Agregamos un evento click al enlace para abrir en una nueva pestaña *después* de generar la URL.
+     whatsappLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevenir el comportamiento por defecto (que sería no hacer nada)
+        if (whatsappLink.href !== "#") { // Solo abrir si la URL es válida.
+             window.open(whatsappLink.href, '_blank'); // Abrir en una nueva pestaña
+        }
+    });
+
+</script>
 </body>
 </html>
