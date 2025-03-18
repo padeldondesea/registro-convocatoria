@@ -6,4 +6,4 @@ total_participantes.txt
 registros.txt
 lista_espera.txt
 configuracion.json
-.cache/
+.cache/.cache/
