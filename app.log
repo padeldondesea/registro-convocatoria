@@ -69,3 +69,31 @@
 2025-03-15 01:40:29,551 - INFO - app.py:27 - Guardando registro para: Camejo
 2025-03-15 04:13:28,165 - INFO - app.py:47 - Participante 'Camejo' eliminado de registrados.
 2025-03-15 04:13:30,403 - INFO - app.py:47 - Participante 'Augusto Stenta' eliminado de registrados.
+2025-03-15 22:58:57,119 - INFO - app.py:27 - Guardando registro para: Augusto Stenta
+2025-03-15 23:00:15,166 - INFO - app.py:47 - Participante 'Augusto Stenta' eliminado de registrados.
+2025-03-16 00:21:48,845 - INFO - app.py:27 - Guardando registro para: Adrián Orlando
+2025-03-16 00:21:57,031 - INFO - app.py:27 - Guardando registro para: Alberto Perillo
+2025-03-16 00:22:02,042 - INFO - app.py:47 - Participante 'Alberto Perillo' eliminado de registrados.
+2025-03-16 00:22:05,163 - INFO - app.py:47 - Participante 'Adrián Orlando' eliminado de registrados.
+2025-03-17 19:40:59,190 - INFO - app.py:27 - Guardando registro para: Adrián Orlando
+2025-03-17 19:41:11,681 - INFO - app.py:27 - Guardando registro para: Yoyo
+2025-03-17 19:41:22,122 - INFO - app.py:27 - Guardando registro para: Bassil
+2025-03-17 19:41:27,643 - INFO - app.py:27 - Guardando registro para: Carmine
+2025-03-17 19:41:38,042 - INFO - app.py:27 - Guardando registro para: Dany Cataldo
+2025-03-17 19:41:50,292 - INFO - app.py:27 - Guardando registro para: Harold Vásquez
+2025-03-17 19:41:57,243 - INFO - app.py:27 - Guardando registro para: Camejo
+2025-03-17 19:42:05,405 - INFO - app.py:27 - Guardando registro para: Franco Granati
+2025-03-17 19:42:11,875 - INFO - app.py:53 - Guardando en espera a: José Luis Saavedra
+2025-03-17 19:42:18,364 - INFO - app.py:53 - Guardando en espera a: Luis Cuevas
+2025-03-17 19:42:48,207 - INFO - app.py:27 - Guardando registro para: José Luis Saavedra
+2025-03-17 19:42:48,213 - INFO - app.py:27 - Guardando registro para: Luis Cuevas
+2025-03-17 19:43:25,328 - INFO - app.py:73 - Participante 'Luis Cuevas' eliminado de la lista de espera.
+2025-03-17 19:43:31,486 - INFO - app.py:73 - Participante 'José Luis Saavedra' eliminado de la lista de espera.
+2025-03-17 19:43:35,167 - INFO - app.py:47 - Participante 'Franco Granati' eliminado de registrados.
+2025-03-17 19:43:50,946 - INFO - app.py:47 - Participante 'Camejo' eliminado de registrados.
+2025-03-17 19:43:53,968 - INFO - app.py:47 - Participante 'Harold Vásquez' eliminado de registrados.
+2025-03-17 19:43:56,615 - INFO - app.py:47 - Participante 'Dany Cataldo' eliminado de registrados.
+2025-03-17 19:44:02,374 - INFO - app.py:47 - Participante 'Carmine' eliminado de registrados.
+2025-03-17 19:44:05,038 - INFO - app.py:47 - Participante 'Bassil' eliminado de registrados.
+2025-03-17 19:44:07,649 - INFO - app.py:47 - Participante 'Yoyo' eliminado de registrados.
+2025-03-17 19:44:10,135 - INFO - app.py:47 - Participante 'Adrián Orlando' eliminado de registrados.
