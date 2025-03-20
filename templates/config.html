@@ -19,7 +19,7 @@
         input[type="date"],
         input[type="time"],
         input[type="number"],
-        textarea, /* Añadimos textarea a los estilos unificados */
+        textarea,
         select {
             width: 100%;
             padding: 10px;
@@ -30,71 +30,93 @@
             box-sizing: border-box;
             font-size: 16px;
         }
-
         /* Estilo específico para el input de fecha (para el placeholder con JS) */
         input[type="date"]::before {
-            color: #999; /* Color del texto del placeholder */
-            content: attr(data-placeholder); /* Usa el atributo data-placeholder */
+            color: #999;
+            content: attr(data-placeholder);
             width: 100%;
         }
         input[type="date"]:focus::before,
         input[type="date"]:valid::before {
             display: none;
         }
-
         /* Estilo para el input de hora (formato AM/PM con JS) */
-          /*Ocultar el formato nativo*/
         input[type="time"]::-webkit-calendar-picker-indicator {
             display: none;
         }
         input[type="time"]::-webkit-datetime-edit-fields-wrapper {
             display: none;
         }
-
+        /* Estilo base para botones submit (verde) */
         button[type="submit"] {
             background-color: #4CAF50;
             color: white;
-            padding: 12px 20px; /* Aumenté el padding */
+            padding: 8px 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 18px; /* Aumenté el tamaño de la fuente */
-            margin-bottom: 20px;  /* Margen inferior */
+            font-size: 14px;
+            margin-bottom: 10px;
         }
         button[type="submit"]:hover {
             background-color: #45a049;
+        }
+        /* Estilo específico para botones de eliminación y vaciar (rojo) */
+        button.delete-button, button.clear-button {
+            background-color: #ff4444;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        button.delete-button:hover, button.clear-button:hover {
+            background-color: #cc0000;
         }
         .error-message {
             color: red;
             margin-top: 10px;
         }
-        /* Contenedor para el input y el texto superpuesto (para la hora) */
         .time-input-container {
-            position: relative; /* Importante para el posicionamiento absoluto */
-            display: inline-block; /* Para que el contenedor se ajuste al ancho del input */
-            width: 100%; /*Para que se ajuste al ancho total*/
+            position: relative;
+            display: inline-block;
+            width: 100%;
         }
-
-        /* Texto superpuesto (para la hora) */
         .time-display {
             position: absolute;
-            top: 50%;  /* Centrado verticalmente */
-            left: 10px; /* Pegado a la izquierda (con un pequeño margen) */
-            transform: translateY(-50%); /* Centrado verticalmente (¡IMPORTANTE!) */
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
             color: #333;
             pointer-events: none;
             font-size: 16px;
             display: none;
         }
-          /* Mostrar el texto y ocultar el input nativo cuando tenga valor */
         .time-input-container input[type="time"]:valid + .time-display {
             display: block;
         }
-        .time-input-container input[type="time"]:valid{
+        .time-input-container input[type="time"]:valid {
             color: transparent;
-            background-color: transparent; /*Para que no se vea el texto original*/
+            background-color: transparent;
         }
-
+        /* Estilos para la gestión de participantes */
+        .participant-management {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .participant-management h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        /* Estilo para el enlace de volver */
+        .back-link {
+            display: block;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -112,8 +134,8 @@
         <input type="text" id="lugar" name="lugar" value="{{ configuracion.lugar }}">
 
         <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha" value="{{ configuracion.fecha }}" required
-        data-placeholder="DD-MM-AAAA">
+        <input type="date" id="fecha" name="fecha" value="{{ configuracion.fecha }}" required data-placeholder="DD-MM-AAAA">
+
         <label for="hora">Hora:</label>
         <div class="time-input-container">
             <input type="time" id="hora" name="hora" value="{{ configuracion.hora }}" required>
@@ -132,33 +154,74 @@
         <label for="comentarios">Comentarios (máximo 1000 caracteres):</label>
         <textarea id="comentarios" name="comentarios" rows="4" maxlength="1000">{{ configuracion.comentarios }}</textarea>
 
-
         <button type="submit">Guardar</button>
     </form>
-    <a href="{{ url_for('index') }}">Volver a la página principal</a>
+
+    <!-- Sección para gestionar participantes -->
+    <div class="participant-management">
+        <h2>Gestionar Participantes</h2>
+
+        <!-- Añadir participante -->
+        <form method="POST" action="{{ url_for('config') }}">
+            <input type="hidden" name="action" value="add_participant">
+            <label for="nuevo_participante">Añadir nuevo participante:</label>
+            <input type="text" id="nuevo_participante" name="nuevo_participante" placeholder="Nombre">
+            <button type="submit">Añadir</button>
+        </form>
+
+        <!-- Editar participante -->
+        <form method="POST" action="{{ url_for('config') }}">
+            <input type="hidden" name="action" value="edit_participant">
+            <label for="nombre_viejo">Editar participante:</label>
+            <select name="nombre_viejo" id="nombre_viejo">
+                <option value="">-- Selecciona un participante --</option>
+                {% for participante in participantes %}
+                    <option value="{{ participante }}">{{ participante }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="nombre_nuevo" placeholder="Nuevo nombre">
+            <button type="submit">Editar</button>
+        </form>
+
+        <!-- Eliminar participante -->
+        <form method="POST" action="{{ url_for('config') }}">
+            <input type="hidden" name="action" value="delete_participant">
+            <label for="participante_eliminar">Eliminar participante:</label>
+            <select name="participante_eliminar" id="participante_eliminar">
+                <option value="">-- Selecciona un participante --</option>
+                {% for participante in participantes %}
+                    <option value="{{ participante }}">{{ participante }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="delete-button">Eliminar</button>
+        </form>
+
+        <!-- Vaciar listas -->
+        <h3>Vaciar Listas</h3>
+        <form method="POST" action="{{ url_for('config') }}" style="display: inline;">
+            <input type="hidden" name="action" value="clear_registrados">
+            <button type="submit" class="clear-button">Vaciar Lista de Convocados</button>
+        </form>
+        <form method="POST" action="{{ url_for('config') }}" style="display: inline; margin-left: 10px;">
+            <input type="hidden" name="action" value="clear_lista_espera">
+            <button type="submit" class="clear-button">Vaciar Lista de Espera</button>
+        </form>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-link">Volver a la página principal</a>
 
     <script>
     // --- JavaScript para la fecha (DD-MM-AAAA) ---
     const dateInput = document.getElementById('fecha');
-
-    //Cuando se carga la página
-    if (dateInput.value) { // Si ya hay una fecha
-        formatDate(); // Formatear la fecha.
+    if (dateInput.value) {
+        formatDate();
     }
-   function formatDate(){
-       const [year, month, day] = dateInput.value.split('-');
-        dateInput.value = `${year}-${month}-${day}`; // Mantener formato interno
-        dateInput.style.color = "#333"; // Asegurar color de texto visible
-
-   }
-
-    // Formatear en el evento 'change' (cuando el usuario selecciona una fecha)
+    function formatDate() {
+        const [year, month, day] = dateInput.value.split('-');
+        dateInput.value = `${year}-${month}-${day}`;
+        dateInput.style.color = "#333";
+    }
     dateInput.addEventListener('change', formatDate);
-
-
-    // --- JavaScript para la hora (HH:MM AM/PM) ---
-    //Este formateo se hace con CSS
-
     </script>
 </body>
 </html>

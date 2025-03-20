@@ -5,9 +5,9 @@ Alvaro Rodrigues
 Augusto Stenta
 Bassil
 Camejo
-Cándido
 Carmine
 Claudio Bagnara
+Cándido
 Dany Cataldo
 Franco Granati
 Gianni Cangialosi
@@ -24,6 +24,7 @@ Nando Jaimes
 Pascual David Di Carlo
 Pinto
 Rodolfo Marquina
+Tony
 Víctor Di Martino
 Víctor Ludeña
 Yoyo

@@ -95,7 +95,7 @@
 </head>
 <body>
     <div class="container">
-       <h1>Registro para la Convocatoria de Juego
+       <h1>Convocatoria de Juego
             <a id="whatsapp-link" href="#">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/240px-WhatsApp.svg.png" alt="Compartir en WhatsApp" class="whatsapp-icon">
             </a>
@@ -135,7 +135,7 @@
         	 {% endif %}
 		<div class="listas-container">
             <div class="registrados">
-              <h2>Lista de participantes registrados.</h2>
+              <h2>Lista de Convocados</h2>
               <p>Total de inscritos: {{ num_registrados }}</p>
               {% if registrados %}
                   <ol>
@@ -184,7 +184,7 @@
 
     // Función para construir el mensaje de WhatsApp
     function construirMensaje(datos) {
-        let texto = "Registro para la Convocatoria de Juego\n\n";
+        let texto = "Convocatoria de Juego\n\n";
         texto += `Torneo: ${datos.torneo}\n`;
         texto += `Lugar: ${datos.lugar}\n`;
         texto += `Fecha: ${datos.fecha}\n`;  // Ya viene formateada

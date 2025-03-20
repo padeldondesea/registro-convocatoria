@@ -97,3 +97,56 @@
 2025-03-17 19:44:05,038 - INFO - app.py:47 - Participante 'Bassil' eliminado de registrados.
 2025-03-17 19:44:07,649 - INFO - app.py:47 - Participante 'Yoyo' eliminado de registrados.
 2025-03-17 19:44:10,135 - INFO - app.py:47 - Participante 'Adrián Orlando' eliminado de registrados.
+2025-03-18 21:25:18,439 - ERROR - app.py:1455 - Exception on /admin [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2077, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1525, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1523, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1509, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/sstenta/./app.py", line 215, in admin
+    session['admin_logged_in'] = True
+  File "/usr/local/lib/python3.10/site-packages/flask/sessions.py", line 97, in _fail
+    raise RuntimeError(
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+2025-03-18 22:07:49,366 - INFO - app.py:48 - Guardando registro para: Dany Cataldo
+2025-03-18 22:07:54,465 - INFO - app.py:68 - Participante 'Dany Cataldo' eliminado de registrados.
+2025-03-18 22:23:31,739 - INFO - app.py:45 - Lista de participantes actualizada.
+2025-03-18 22:23:31,757 - WARNING - app.py:107 - Intento de eliminar 'Alex', pero no está en registrados.
+2025-03-18 22:23:31,767 - WARNING - app.py:138 - Intento de eliminar 'Alex' de la lista de espera, pero no está.
+2025-03-18 22:23:31,772 - INFO - app.py:73 - Participante eliminado: Alex
+2025-03-18 22:23:45,686 - INFO - app.py:45 - Lista de participantes actualizada.
+2025-03-18 22:23:45,686 - INFO - app.py:52 - Participante añadido: Alex
+2025-03-18 22:30:00,228 - INFO - app.py:84 - Guardando registro para: Gianni Cangialosi
+2025-03-18 23:07:53,164 - INFO - app.py:104 - Participante 'Gianni Cangialosi' eliminado de registrados.
+2025-03-18 23:08:52,237 - INFO - app.py:46 - Lista de participantes actualizada.
+2025-03-18 23:08:52,237 - INFO - app.py:53 - Participante añadido: Gustavo Pérez
+2025-03-18 23:09:13,978 - INFO - app.py:46 - Lista de participantes actualizada.
+2025-03-18 23:09:13,984 - WARNING - app.py:107 - Intento de eliminar 'Gustavo Pérez', pero no está en registrados.
+2025-03-18 23:09:13,991 - WARNING - app.py:138 - Intento de eliminar 'Gustavo Pérez' de la lista de espera, pero no está.
+2025-03-18 23:09:13,993 - INFO - app.py:73 - Participante eliminado: Gustavo Pérez
+2025-03-18 23:09:42,734 - INFO - app.py:197 - Lista de espera vaciada.
+2025-03-18 23:09:47,907 - INFO - app.py:189 - Lista de registrados vaciada.
+2025-03-18 23:44:39,631 - INFO - app.py:84 - Guardando registro para: Augusto Stenta
+2025-03-18 23:45:59,070 - INFO - app.py:104 - Participante 'Augusto Stenta' eliminado de registrados.
+2025-03-19 13:04:59,097 - ERROR - user_wsgi_wrapper.py:170 - OSError: write error
+2025-03-19 20:02:58,132 - INFO - app.py:84 - Guardando registro para: Adrián Orlando
+2025-03-19 21:39:13,002 - INFO - app.py:104 - Participante 'Adrián Orlando' eliminado de registrados.
+2025-03-20 17:07:28,931 - INFO - app.py:84 - Guardando registro para: Dany Cataldo
+2025-03-20 17:07:52,160 - INFO - app.py:46 - Lista de participantes actualizada.
+2025-03-20 17:07:52,161 - INFO - app.py:53 - Participante añadido: Tony
+2025-03-20 17:08:04,967 - INFO - app.py:84 - Guardando registro para: Tony
+2025-03-20 17:08:10,988 - INFO - app.py:84 - Guardando registro para: Harold Vásquez
+2025-03-20 17:08:19,739 - INFO - app.py:84 - Guardando registro para: Cándido
+2025-03-20 17:08:27,995 - INFO - app.py:84 - Guardando registro para: Lukvichh
+2025-03-20 17:08:37,852 - INFO - app.py:84 - Guardando registro para: Camejo
+2025-03-20 17:08:43,259 - INFO - app.py:84 - Guardando registro para: Alex
+2025-03-20 17:08:50,731 - INFO - app.py:84 - Guardando registro para: Luis Cuevas
+2025-03-20 17:09:26,701 - INFO - app.py:84 - Guardando registro para: Augusto Stenta
+2025-03-20 17:09:33,661 - INFO - app.py:84 - Guardando registro para: Gianni Cangialosi
+2025-03-20 17:09:38,871 - INFO - app.py:84 - Guardando registro para: Franco Granati
+2025-03-20 17:54:49,584 - INFO - app.py:84 - Guardando registro para: Miguel Cáceres
+2025-03-20 19:45:27,047 - INFO - app.py:116 - Guardando en espera a: Adrián Orlando
